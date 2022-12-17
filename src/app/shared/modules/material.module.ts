@@ -3,10 +3,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule],
-  exports: [MatToolbarModule, MatIconModule, MatButtonModule],
+  imports: [
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressBarModule,
+  ],
+  exports: [
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressBarModule,
+  ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
