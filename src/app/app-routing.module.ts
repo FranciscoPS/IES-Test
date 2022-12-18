@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CheckLoginGuard } from './shared/guards/check-login.guard';
 
 const routes: Routes = [
   {
@@ -11,16 +12,21 @@ const routes: Routes = [
     path: 'welcome',
     loadChildren: () =>
       import('./pages/welcome/welcome.module').then((m) => m.WelcomeModule),
+    canActivate: [CheckLoginGuard],
   },
   {
     path: 'conversions',
     loadChildren: () =>
-      import('./pages/conversions/conversions.module').then((m) => m.ConversionsModule),
+      import('./pages/conversions/conversions.module').then(
+        (m) => m.ConversionsModule
+      ),
+    canActivate: [CheckLoginGuard],
   },
   {
     path: 'dates',
     loadChildren: () =>
       import('./pages/dates/dates.module').then((m) => m.DatesModule),
+    canActivate: [CheckLoginGuard],
   },
   {
     path: 'form',
