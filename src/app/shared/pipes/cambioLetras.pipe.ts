@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { VOWELS } from '@constants';
+import { VOWELS } from './../constants/vowels';
 
 @Pipe({
   name: 'cambioLetras',
