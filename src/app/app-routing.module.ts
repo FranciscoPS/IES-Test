@@ -22,6 +22,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/dates/dates.module').then((m) => m.DatesModule),
   },
+  {
+    path: 'form',
+    loadChildren: () =>
+      import('./pages/form/form.module').then((m) => m.FormModule),
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', pathMatch: 'full', redirectTo: 'login' },
 ];
