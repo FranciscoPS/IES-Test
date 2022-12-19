@@ -6,6 +6,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
     MatProgressBarModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatToolbarModule,
@@ -23,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
     MatProgressBarModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ILoginResponse } from 'src/app/shared/models/login.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 @Component({
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _authService: AuthService,
-    private _builder: FormBuilder
+    private _builder: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {}
 
   public ngOnInit(): void {
@@ -36,21 +38,29 @@ export class LoginComponent implements OnInit {
         password: this.loginFormGroup.value.password,
       })
       .subscribe({
-        next: res => this.onLoginSuccess(res),
-        error: err => this.onLoginError(err)
+        next: (res) => this.onLoginSuccess(res),
+        error: (err) => this.onLoginError(err),
       });
   }
 
   private onLoginSuccess(response: ILoginResponse): void {
-    console.log(response);
+    const { mensaje } = response;
+
+    this.openSnackBar(mensaje as any);
 
     this.loading = false;
   }
 
   private onLoginError(error: any) {
-    console.log(error);
+    this.openSnackBar('An error ocurred, try again later');
+
+    console.error(error);
 
     this.loading = false;
+  }
+
+  private openSnackBar(message: string) {
+    this._snackBar.open(message, 'Close');
   }
 
   /**
