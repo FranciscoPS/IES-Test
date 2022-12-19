@@ -16,7 +16,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   public hide: boolean = true;
-  public loading: boolean = false;
   public loginFormGroup: FormGroup = this.initForm(this._builder);
 
   constructor(
@@ -29,9 +28,11 @@ export class LoginComponent implements OnInit {
     this.initForm(this._builder);
   }
 
+  /**
+   * We're calling the login function on our auth service, passing in the username and password from the
+   * form, and then subscribing to the observable that is returned
+   */
   public onLogin(): void {
-    this.loading = true;
-
     this._authService
       .login({
         username: this.loginFormGroup.value.username,
@@ -47,21 +48,17 @@ export class LoginComponent implements OnInit {
     const { mensaje } = response;
 
     this.openSnackBar(mensaje as any);
-
-    this.loading = false;
   }
 
   private onLoginError(error: any) {
     this.openSnackBar('An error ocurred, try again later');
 
     console.error(error);
-
-    this.loading = false;
   }
 
   private openSnackBar(message: string) {
-    this._snackBar.open(message, 'Close',{
-      verticalPosition: 'top'
+    this._snackBar.open(message, 'Close', {
+      verticalPosition: 'top',
     });
   }
 
@@ -76,9 +73,7 @@ export class LoginComponent implements OnInit {
     password: FormControl<string | null>;
   }> {
     return formBuilder.group({
-      username: new FormControl('', [
-        Validators.required
-      ]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
   }
