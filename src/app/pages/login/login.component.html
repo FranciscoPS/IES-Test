@@ -2,20 +2,42 @@
   <div class="card">
     <div class="card-body">
       <h1 class="text-center">Login</h1>
-      <form [formGroup]="loginFormGroup" (ngSubmit)="onLogin()">
+      <form [formGroup]="loginFormGroup">
         <div class="form-group">
           <label for="username">User Name</label>
           <input type="text" class="form-control" formControlName="username" />
         </div>
+
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            formControlName="password"
-          />
+
+          <div class="form-control d-flex justify-content-between">
+            <input
+              class="password"
+              matInput
+              type="password"
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            />
+
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </div>
         </div>
-        <button type="submit" [disabled]="loginFormGroup.invalid" class="mt-4 btn btn-info btn-lg btn-block">
+
+        <button
+          type="button"
+          (click)="onLogin()"
+          [disabled]="loginFormGroup.invalid"
+          class="mt-4 btn btn-info btn-lg btn-block"
+        >
           Login
         </button>
       </form>

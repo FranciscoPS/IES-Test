@@ -2,3 +2,13 @@
   margin: 0 auto;
   max-width: 500px;
 }
+
+.password {
+  width: 100%;
+
+  border: none;
+}
+
+.password:focus-visible {
+  outline: none;
+}

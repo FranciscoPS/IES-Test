@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  public hide: boolean = true;
   public loading: boolean = false;
   public loginFormGroup: FormGroup = this.initForm(this._builder);
 
@@ -34,7 +35,10 @@ export class LoginComponent implements OnInit {
         username: this.loginFormGroup.value.username,
         password: this.loginFormGroup.value.password,
       })
-      .subscribe(this.onLoginSuccess.bind(this), this.onLoginFail.bind(this));
+      .subscribe({
+        next: res => this.onLoginSuccess(res),
+        error: err => this.onLoginError(err)
+      });
   }
 
   private onLoginSuccess(response: ILoginResponse): void {
@@ -43,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.loading = false;
   }
 
-  private onLoginFail(error: any) {
+  private onLoginError(error: any) {
     console.log(error);
 
     this.loading = false;
