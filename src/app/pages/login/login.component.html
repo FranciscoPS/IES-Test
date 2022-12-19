@@ -35,7 +35,7 @@
         <button
           type="button"
           (click)="onLogin()"
-          [disabled]="loginFormGroup.invalid"
+          [disabled]="loginFormGroup.invalid || loading"
           class="mt-4 btn btn-info btn-lg btn-block"
         >
           Login
