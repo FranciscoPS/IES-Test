@@ -1,42 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms'
-// import { AuthService } from '../services/auth.service';
-// import { Route } from '@angular/compiler/src/core';
-import {Router} from '@angular/router';
-
+import {
+  Form,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  // providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
+  public loginFormGroup: FormGroup = this.initForm(this._builder);
 
-  loginForm= new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
-  })
+  constructor(
+    private _authService: AuthService,
+    private _builder: FormBuilder
+  ) {}
 
-  constructor( private router:Router) { }
-
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.initForm(this._builder);
   }
 
-  onLogin(){
-    console.log('Hello')
+  public onLogin(): void {
+    console.log(this.loginFormGroup);
+
+    this._authService
+      .login({
+        username: this.loginFormGroup.value.username,
+        password: this.loginFormGroup.value.password,
+      })
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
-  // async onLogin(){
-  //   const {email, password} = this.loginForm.value;
-  //   try{
-  //     const user = await this.authSvc.login(email, password);
-  //     if(user){
-  //       // Rediert to home
-  //       this.router.navigate(['/home']);
-  //     }
-  //   }catch(error){
-  //     console.log(error);
-  //   }
-  // }
-
+  private initForm(formBuilder: FormBuilder): FormGroup<{
+    username: FormControl<string | null>;
+    password: FormControl<string | null>;
+  }> {
+    return formBuilder.group({
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(255),
+      ]),
+      password: new FormControl('', [Validators.required]),
+    });
+  }
 }
