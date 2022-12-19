@@ -1,48 +1,58 @@
 <section class="login-section">
-  <div class="card">
-    <div class="card-body">
-      <h1 class="text-center">Login</h1>
-      <form [formGroup]="loginFormGroup">
-        <div class="form-group">
-          <label for="username">User Name</label>
-          <input type="text" class="form-control" formControlName="username" />
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-
-          <div class="form-control d-flex justify-content-between">
-            <input
-              class="password"
-              matInput
-              type="password"
-              [type]="hide ? 'password' : 'text'"
-              formControlName="password"
-            />
-
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="hide = !hide"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide"
-            >
-              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-            </button>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          (click)="onLogin()"
-          [disabled]="loginFormGroup.invalid || loading"
-          class="mt-4 btn btn-info btn-lg btn-block"
-        >
-          Login
-        </button>
-      </form>
-      <span class="blockquote-footer">By Francisco Peralta</span>
-    </div>
-    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <div class="mb-3 title text-center">
+    <img src="/assets/images/Angular.svg" alt="Angular Logo" />
+    <h2 class="mt-1">IES Systems Test</h2>
+    <p class="mt-2">
+      This is an Angular Test for IES Systems, please enter your username and
+      password to continue
+    </p>
   </div>
+
+  <form [formGroup]="loginFormGroup">
+    <mat-form-field class="full-width">
+      <mat-label>Enter your username</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="username"
+        placeholder="User"
+      />
+      <mat-error *ngIf="loginFormGroup.get('username')?.hasError('required')">
+        Userename is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width mt-2">
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        [type]="hide ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-error *ngIf="loginFormGroup.get('password')?.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      type="button"
+      [disabled]="loginFormGroup.invalid || loading"
+      class="mt-4 btn btn-info btn-lg btn-block"
+      (click)="onLogin()"
+    >
+      Login
+    </button>
+  </form>
+  <span class="blockquote-footer mt-5 text-muted text-center"
+    >By Francisco Peralta</span
+  >
 </section>

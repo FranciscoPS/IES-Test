@@ -60,7 +60,9 @@ export class LoginComponent implements OnInit {
   }
 
   private openSnackBar(message: string) {
-    this._snackBar.open(message, 'Close');
+    this._snackBar.open(message, 'Close',{
+      verticalPosition: 'top'
+    });
   }
 
   /**
@@ -75,9 +77,7 @@ export class LoginComponent implements OnInit {
   }> {
     return formBuilder.group({
       username: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(255),
+        Validators.required
       ]),
       password: new FormControl('', [Validators.required]),
     });
