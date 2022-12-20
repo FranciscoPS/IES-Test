@@ -3,23 +3,35 @@
 
   <div class="mt-4 d-flex align-items-center">
     <mat-card class="mb-3">
-      <mat-calendar [(selected)]="date"></mat-calendar>
+      <mat-calendar [(selected)]="dateSelected"></mat-calendar>
     </mat-card>
 
     <div class="inputs ml-3">
       <mat-form-field class="d-block" appearance="fill">
         <mat-label>Quantity</mat-label>
-        <input type=number matInput placeholder="Quantity">
+        <input
+          [(ngModel)]="quantity"
+          type="number"
+          matInput
+          placeholder="Quantity"
+        />
       </mat-form-field>
 
       <mat-form-field class="d-block" appearance="fill">
         <mat-label>Unit</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
+        <mat-select [(ngModel)]="units">
+          <mat-option *ngFor="let item of unitsCatalog" [value]="item.value">
+            {{ item.viewValue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <p>
+        Your result is:
+        <span class="result text-danger">{{
+          getResult | date : "dd/MM/yyyy"
+        }}</span>
+      </p>
     </div>
   </div>
 
