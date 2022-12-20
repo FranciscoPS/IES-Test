@@ -15,4 +15,10 @@ export class AuthService {
   public login(data: ILogin): Observable<ILoginResponse> {
     return this._http.post<any>(`${this.baseUrl}/login`, data);
   }
+
+  public checkLogin(): boolean {
+    const sessionLogged = sessionStorage.getItem('logged');
+
+    return sessionLogged === 'true';
+  }
 }

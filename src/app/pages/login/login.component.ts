@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ILoginResponse } from 'src/app/shared/models/login.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 @Component({
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _authService: AuthService,
     private _builder: FormBuilder,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -45,9 +47,11 @@ export class LoginComponent implements OnInit {
   }
 
   private onLoginSuccess(response: ILoginResponse): void {
-    const { mensaje } = response;
+    if (response.exito || response.exito === false) {
+      sessionStorage.setItem('logged', 'true');
 
-    this.openSnackBar(mensaje as any);
+      this._router.navigate(['/welcome']);
+    }
   }
 
   private onLoginError(error: any) {
