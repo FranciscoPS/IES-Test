@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 
 interface IMenu {
@@ -13,6 +14,8 @@ interface IMenu {
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent {
+  public isOpen:boolean = true;
+
   public menu: IMenu[] = [
     {
       icon: 'home',

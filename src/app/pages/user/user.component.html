@@ -1,7 +1,8 @@
 <app-navbar></app-navbar>
+
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer mode="side" opened>
-    <nav id="sidebarMenu" class="d-lg-block bg-white p-3">
+  <mat-drawer #drawer mode="side" [opened]="isOpen">
+    <nav #sidenav class="d-lg-block bg-white p-3">
       <div *ngFor="let option of menu" class="list-group-flush link">
         <a
           (click)="navigate(option.path)"
@@ -15,11 +16,12 @@
     </nav>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
-    <!-- <button type="button" mat-button (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button> -->
+  <button mat-icon-button class="drawer-toggle" (click)="isOpen = !isOpen">
+    <mat-icon *ngIf="isOpen">chevron_left</mat-icon>
+    <mat-icon *ngIf="!isOpen">chevron_right</mat-icon>
+  </button>
 
+  <div>
     <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>
