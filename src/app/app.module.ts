@@ -6,11 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
