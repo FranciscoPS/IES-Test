@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UNITS_CATALOG } from 'src/app/shared/constants/dates';
 import { ICatalog } from 'src/app/shared/models/dates.model';
+import { DatesService } from 'src/app/shared/services/dates.service';
 
 @Component({
   selector: 'app-dates',
@@ -9,7 +10,7 @@ import { ICatalog } from 'src/app/shared/models/dates.model';
   styleUrls: ['./dates.component.scss'],
   providers: [DatePipe],
 })
-export class DatesComponent implements OnInit {
+export class DatesComponent {
   public quantity: number = 0;
   public units: string = '';
   public dateSelected: Date = new Date();
@@ -17,45 +18,31 @@ export class DatesComponent implements OnInit {
 
   public unitsCatalog: ICatalog[] = UNITS_CATALOG;
 
-  constructor() {}
+  constructor(private _datesServie: DatesService) {}
 
   get getResult(): string {
     return this.result.toDateString();
   }
 
-  ngOnInit() {}
-
   public calculateDate(): void {
     switch (this.units) {
       case 'day':
-        this.result = new Date(this.addDays());
+        this.result = new Date(
+          this._datesServie.addDays(this.dateSelected, this.quantity)
+        );
         break;
 
       case 'month':
-        this.result = new Date(this.addMonths());
+        this.result = new Date(
+          this._datesServie.addMonths(this.dateSelected, this.quantity)
+        );
         break;
 
       case 'year':
-        this.result = new Date(this.addYears());
+        this.result = new Date(
+          this._datesServie.addYears(this.dateSelected, this.quantity)
+        );
         break;
     }
-  }
-
-  private addDays(): number {
-    let res = new Date();
-
-    return res.setDate(this.dateSelected.getDate() + this.quantity);
-  }
-
-  private addMonths(): number {
-    let res = new Date();
-
-    return res.setMonth(this.dateSelected.getMonth() + this.quantity);
-  }
-
-  private addYears(): number {
-    let res = new Date();
-
-    return res.setFullYear(this.dateSelected.getFullYear() + this.quantity);
   }
 }
