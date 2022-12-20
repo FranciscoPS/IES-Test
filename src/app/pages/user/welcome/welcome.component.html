@@ -1,7 +1,15 @@
 <section class="welcome-section">
-
   <div class="main-container">
     <h1 class="title mt-5">Welcome to <span>My Portal</span></h1>
     <p>Please tell us your name.</p>
+    <button
+      type="button"
+      (click)="openDialog()"
+      class="mt-5 btn btn-lg btn-warning font-weight-bold text-white"
+    >
+      Write your name
+    </button>
+
+    <h4 class="mt-5">Your name: {{ name | cambioLetras}}</h4>
   </div>
 </section>
