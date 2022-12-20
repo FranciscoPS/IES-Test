@@ -1,13 +1,24 @@
-.calendar-section{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    
-    img{
-        width: 150px;
-    }
+.calendar-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  img {
+    width: 150px;
+  }
 }
 
-.result{
-    font-size: 20px;
+.calendar-container {
+  display: flex;
+  align-items: center;
+}
+
+.result {
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    flex-direction: column;
+  }
 }
