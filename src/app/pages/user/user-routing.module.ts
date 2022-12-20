@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
+import { CheckLoginGuard } from './../../shared/guards/check-login.guard';
 
 const routes: Routes = [
   {
@@ -34,7 +35,12 @@ const routes: Routes = [
         loadChildren: () =>
           import('./form/form.module').then((m) => m.FormModule),
       },
+      {
+        path: '**',
+        redirectTo: 'welcome',
+      },
     ],
+    canActivate: [CheckLoginGuard],
   },
 ];
 
