@@ -1,43 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-
-interface IMenu {
-  icon: string;
-  description: string;
-  path: string;
-}
-
+import { SIDENAV_MENU } from 'src/app/shared/constants/sidenav';
+import { IMenu } from 'src/app/shared/models/sidenav.model';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent {
-  public isOpen:boolean = true;
-
-  public menu: IMenu[] = [
-    {
-      icon: 'home',
-      description: 'Welcome',
-      path: '/welcome',
-    },
-    {
-      icon: 'calculate',
-      description: 'Conversions',
-      path: '/conversions',
-    },
-    {
-      icon: 'insert_invitation',
-      description: 'Dates',
-      path: '/dates',
-    },
-    {
-      icon: 'pending_actions',
-      description: 'Form',
-      path: '/form',
-    },
-  ];
+  public isOpen:boolean = false;
+  public menu: IMenu[] = SIDENAV_MENU;
 
   constructor(private _router: Router) {}
 
