@@ -9,6 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   imports: [
@@ -21,6 +25,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSnackBarModule,
     MatSidenavModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatCardModule,
   ],
   exports: [
     MatToolbarModule,
@@ -32,6 +40,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSnackBarModule,
     MatSidenavModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatCardModule,
   ],
   providers: [
     {

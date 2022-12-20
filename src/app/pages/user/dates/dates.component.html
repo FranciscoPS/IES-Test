@@ -1,3 +1,29 @@
-<p>
-  dates works!
-</p>
+<section class="calendar-section">
+  <img class="mt-5" src="/assets/images/calendar.png" alt="calendar" />
+
+  <div class="mt-4 d-flex align-items-center">
+    <mat-card class="mb-3">
+      <mat-calendar [(selected)]="date"></mat-calendar>
+    </mat-card>
+
+    <div class="inputs ml-3">
+      <mat-form-field class="d-block" appearance="fill">
+        <mat-label>Quantity</mat-label>
+        <input type=number matInput placeholder="Quantity">
+      </mat-form-field>
+
+      <mat-form-field class="d-block" appearance="fill">
+        <mat-label>Unit</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{ food.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <button class="mt-4" mat-raised-button color="warn" (click)="calculateDate()">
+    Calculate
+  </button>
+</section>
