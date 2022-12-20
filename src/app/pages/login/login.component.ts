@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     if (response.exito || response.exito === false) {
       sessionStorage.setItem('logged', 'true');
 
-      this._router.navigate(['/welcome']);
+      this._router.navigate(['/user/welcome']);
     }
   }
 
