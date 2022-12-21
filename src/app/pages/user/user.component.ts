@@ -14,6 +14,11 @@ export class UserComponent {
 
   constructor(private _router: Router) {}
 
+  /**
+   * It takes a string as an argument, and then uses the Angular Router to navigate to the path that
+   * was passed in
+   * @param {string} path - string - The path to navigate to.
+   */
   public navigate(path: string): void {
     this._router.navigate(['/user' + path]);
   }
