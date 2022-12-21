@@ -14,6 +14,9 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * The openDialog() function opens a dialog box with the InputTextDialogComponent component
+   */
   openDialog(): void {
     const dialogRef = this.dialog.open(InputTextDialogComponent, {
       data: { name: this.name },
