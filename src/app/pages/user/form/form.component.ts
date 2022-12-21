@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { IMaritalStatusCatalog } from 'src/app/shared/models/catalogs.model';
+import { AlertsService } from 'src/app/shared/services/alerts.service';
 import { CatalogService } from 'src/app/shared/services/catalog.service';
 import { whiteSpaceValidator } from 'src/app/shared/validators/whiteSpace.validator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
@@ -13,35 +15,37 @@ export class FormComponent implements OnInit {
   public mainForm!: FormGroup;
   public maritalStatusCatalog: IMaritalStatusCatalog[] = [];
 
-  constructor(private formBuilder: FormBuilder, private catalogService: CatalogService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private catalogService: CatalogService,
+    private alert: AlertsService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
     this.fillMaritalStatusCatalog();
   }
 
- /**
-  * It returns the FormArray named 'librosLeidosUltimosTresMeses' from the mainForm
-  * @returns The FormArray of the librosLeidosUltimosTresMeses property of the mainForm.
-  */
+  /**
+   * It returns the FormArray named 'librosLeidosUltimosTresMeses' from the mainForm
+   * @returns The FormArray of the librosLeidosUltimosTresMeses property of the mainForm.
+   */
   get librosLeidosUltimosTresMeses() {
     return this.mainForm.get('librosLeidosUltimosTresMeses') as FormArray;
   }
 
- /**
-  * It returns the value of the control named 'actualmentePracticasLectura' in the mainForm
-  * @returns The value of the control 'actualmentePracticasLectura'
-  */
+  /**
+   * It returns the value of the control named 'actualmentePracticasLectura' in the mainForm
+   * @returns The value of the control 'actualmentePracticasLectura'
+   */
   get actualmentePracticasLectura() {
     return this.mainForm.controls['actualmentePracticasLectura'].value;
   }
 
-  /**
-   * The function checks the form and logs the value of the control 'librosLeidosUltimosTresMeses' to
-   * the console
-   */
   public checkForm(): void {
-    console.log(this.mainForm.controls['librosLeidosUltimosTresMeses'].value);
+    this.mainForm.valid
+      ? this.alert.successNotification('The form is valid!')
+      : this.alert.errorNotification('Please check again your answers');
   }
 
   /**
@@ -55,7 +59,7 @@ export class FormComponent implements OnInit {
 
   /**
    * "Remove the book at the given index from the list of books read in the last three months."
-   * 
+   *
    * The first line of the function is a comment. Comments are ignored by the compiler. They are used
    * to document the code
    * @param {number} index - number - The index of the item to remove.
@@ -69,25 +73,36 @@ export class FormComponent implements OnInit {
    * are adding the required validator to the librosLeidosUltimosTresMeses control, otherwise we are
    * clearing the validators
    */
-  private initForm(): void{
+  private initForm(): void {
     this.mainForm = this.formBuilder.group({
       nombres: ['', [Validators.required, whiteSpaceValidator()]],
       apellidos: ['', [Validators.required]],
       fumas: [null, [Validators.required]],
       actualmentePracticasLectura: [null, [Validators.required]],
-      librosLeidosUltimosTresMeses: this.formBuilder.array([], Validators.required),
+      librosLeidosUltimosTresMeses: this.formBuilder.array(
+        [],
+        Validators.required
+      ),
       estadoCivil: [null, [Validators.required]],
     });
 
-    this.mainForm.get('actualmentePracticasLectura')?.valueChanges.subscribe(val => {
-      if(val){
-        this.mainForm.controls['librosLeidosUltimosTresMeses'].setValidators([Validators.required])
-      }else{
-        this.mainForm.controls['librosLeidosUltimosTresMeses'].clearValidators()
-      }
+    this.mainForm
+      .get('actualmentePracticasLectura')
+      ?.valueChanges.subscribe((val) => {
+        if (val) {
+          this.mainForm.controls['librosLeidosUltimosTresMeses'].setValidators([
+            Validators.required,
+          ]);
+        } else {
+          this.mainForm.controls[
+            'librosLeidosUltimosTresMeses'
+          ].clearValidators();
+        }
 
-      this.mainForm.controls['librosLeidosUltimosTresMeses'].updateValueAndValidity();
-    });
+        this.mainForm.controls[
+          'librosLeidosUltimosTresMeses'
+        ].updateValueAndValidity();
+      });
   }
 
   /**
@@ -95,16 +110,16 @@ export class FormComponent implements OnInit {
    * observable. We subscribe to that observable, and when the observable returns a value, we assign
    * that value to the maritalStatusCatalog property
    */
-  private fillMaritalStatusCatalog(): void{
+  private fillMaritalStatusCatalog(): void {
     this.catalogService.getMaritalStatusCatalog().subscribe({
-      next: res => {
-        if(!res) return;
+      next: (res) => {
+        if (!res) return;
 
         this.maritalStatusCatalog = res;
       },
-      error: err => {
-        console.error(err)
-      }
-    })
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 }

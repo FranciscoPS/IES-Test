@@ -1,6 +1,7 @@
 <section class="form-section">
   <div class="mt-4 form-container">
     <h1 class="text-center">Form Validators</h1>
+
     <form [formGroup]="mainForm" class="mt-5">
       <!-- Nombres -->
       <mat-form-field class="full-width" appearance="fill">
@@ -102,7 +103,10 @@
       <mat-form-field class="full-width mt-3" appearance="fill">
         <mat-label>Marital Staus</mat-label>
         <mat-select formControlName="estadoCivil">
-          <mat-option *ngFor="let item of maritalStatusCatalog" [value]="item.id">
+          <mat-option
+            *ngFor="let item of maritalStatusCatalog"
+            [value]="item.id"
+          >
             {{ item.description }}
           </mat-option>
         </mat-select>
@@ -110,13 +114,12 @@
 
       <button
         type="button"
-        class="mt-4 d-block"
         mat-raised-button
+        class="btn-block mt-1"
         color="warn"
-        [disabled]="mainForm.invalid"
         (click)="checkForm()"
       >
-        Done
+        Validate
       </button>
     </form>
   </div>
