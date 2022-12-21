@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { IMaritalStatusCatalog } from 'src/app/shared/models/catalogs.model';
+import { CatalogService } from 'src/app/shared/services/catalog.service';
 import { whiteSpaceValidator } from 'src/app/shared/validators/whiteSpace.validator';
 
 @Component({
@@ -9,11 +11,13 @@ import { whiteSpaceValidator } from 'src/app/shared/validators/whiteSpace.valida
 })
 export class FormComponent implements OnInit {
   public mainForm!: FormGroup;
+  public maritalStatusCatalog: IMaritalStatusCatalog[] = [];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private catalogService: CatalogService) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.fillMaritalStatusCatalog();
   }
 
  /**
@@ -84,5 +88,23 @@ export class FormComponent implements OnInit {
 
       this.mainForm.controls['librosLeidosUltimosTresMeses'].updateValueAndValidity();
     });
+  }
+
+  /**
+   * We're calling the getMaritalStatusCatalog() function from the catalogService, which returns an
+   * observable. We subscribe to that observable, and when the observable returns a value, we assign
+   * that value to the maritalStatusCatalog property
+   */
+  private fillMaritalStatusCatalog(): void{
+    this.catalogService.getMaritalStatusCatalog().subscribe({
+      next: res => {
+        if(!res) return;
+
+        this.maritalStatusCatalog = res;
+      },
+      error: err => {
+        console.error(err)
+      }
+    })
   }
 }
