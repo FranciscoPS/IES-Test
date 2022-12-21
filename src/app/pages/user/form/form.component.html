@@ -49,22 +49,29 @@
       </div>
 
       <!-- Latest books -->
-      <div formArrayName="librosLeidosUltimosTresMeses">
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Books read in the last 3 months</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="librosLeidosUltimosTresMeses"
-            placeholder="Book's name"
-          />
-        </mat-form-field>
+      <div formArrayName="librosLeidosUltimosTresMeses" class="books-container">
+        <ng-container
+          *ngFor="
+            let book of librosLeidosUltimosTresMeses.controls;
+            let i = index
+          "
+        >
+          <div class="d-flex">
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Books read in the last 3 months</mat-label>
+              <input
+                type="text"
+                matInput
+                [formControlName]="i"
+                placeholder="Book's name"
+              />
+            </mat-form-field>
 
-        <div *ngFor="let book of [1,2] ">{{book}}</div> 
-
-        <button mat-mini-fab (click)="addBook()">
-          <mat-icon class="add-course-btn">add</mat-icon>
-        </button>
+            <button class="ml-3 mt-2" mat-mini-fab (click)="addBook()">
+              <mat-icon class="add-course-btn">add</mat-icon>
+            </button>
+          </div>
+        </ng-container>
       </div>
 
       <button class="mt-4" mat-raised-button color="warn" (click)="checkForm()">
