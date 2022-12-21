@@ -46,9 +46,19 @@ export class FormComponent implements OnInit {
    * If the form is valid, show a success notification, otherwise show an error notification
    */
   public checkForm(): void {
-    this.mainForm.valid
-      ? this.alert.successNotification('The form is valid!')
-      : this.alert.errorNotification('Please check again your answers');
+    if (this.mainForm.valid) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Good Job!',
+        text: 'The form is valid!',
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops',
+        text: 'Please check again your answers',
+      });
+    }
   }
 
   /**
