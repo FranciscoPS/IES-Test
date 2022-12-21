@@ -30,6 +30,7 @@
         [type]="hide ? 'password' : 'text'"
       />
       <button
+        type="button"
         mat-icon-button
         matSuffix
         (click)="hide = !hide"
@@ -44,7 +45,7 @@
     </mat-form-field>
 
     <button
-      type="button"
+      type="submit"
       [disabled]="loginFormGroup.invalid"
       class="mt-4 btn btn-info btn-lg btn-block"
       (click)="onLogin()"
