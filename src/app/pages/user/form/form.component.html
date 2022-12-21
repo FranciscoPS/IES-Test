@@ -49,7 +49,14 @@
       </div>
 
       <!-- Latest books -->
-      <div formArrayName="librosLeidosUltimosTresMeses" class="books-container">
+      <div *ngIf="actualmentePracticasLectura" formArrayName="librosLeidosUltimosTresMeses" class="books-container">
+        <div class="d-flex align-items-center py-3">
+          <p class="mb-0">Add a new book:</p>
+          <button type="button" class="ml-3 mt-2" mat-mini-fab (click)="addBook()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+        </div>
+
         <ng-container
           *ngFor="
             let book of librosLeidosUltimosTresMeses.controls;
@@ -58,7 +65,7 @@
         >
           <div class="d-flex">
             <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Books read in the last 3 months</mat-label>
+              <mat-label>Book read in the last 3 months</mat-label>
               <input
                 type="text"
                 matInput
@@ -67,14 +74,20 @@
               />
             </mat-form-field>
 
-            <button class="ml-3 mt-2" mat-mini-fab (click)="addBook()">
-              <mat-icon class="add-course-btn">add</mat-icon>
+            <button type="button" class="ml-3 mt-2" mat-mini-fab (click)="removeBook(i)">
+              <mat-icon class="add-course-btn">close</mat-icon>
             </button>
           </div>
         </ng-container>
       </div>
 
-      <button class="mt-4" mat-raised-button color="warn" (click)="checkForm()">
+      <button
+        type="button"
+        class="mt-4"
+        mat-raised-button
+        color="warn"
+        (click)="checkForm()"
+      >
         Done
       </button>
     </form>

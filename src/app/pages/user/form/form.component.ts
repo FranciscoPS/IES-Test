@@ -19,9 +19,7 @@ export class FormComponent {
     apellidos: ['', [Validators.required]],
     fumas: [null, [Validators.required]],
     actualmentePracticasLectura: [null, [Validators.required]],
-    librosLeidosUltimosTresMeses: this.formBuilder.array([
-      this.formBuilder.control('', [Validators.required]),
-    ]),
+    librosLeidosUltimosTresMeses: this.formBuilder.array([]),
     estadoCivil: [null, [Validators.required]],
   });
 
@@ -31,8 +29,12 @@ export class FormComponent {
     return this.mainForm.get('librosLeidosUltimosTresMeses') as FormArray;
   }
 
+  get actualmentePracticasLectura() {
+    return this.mainForm.controls['actualmentePracticasLectura'].value;
+  }
+
   public checkForm(): void {
-    console.log(this.mainForm.controls['fumas'].value);
+    console.log(this.actualmentePracticasLectura);
   }
 
   public addBook(): void {
@@ -41,4 +43,7 @@ export class FormComponent {
     );
   }
 
+  public removeBook(index: number): void {
+    this.librosLeidosUltimosTresMeses.removeAt(index);
+  }
 }
