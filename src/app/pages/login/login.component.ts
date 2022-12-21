@@ -46,6 +46,11 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  /**
+   * If the response is successful, set the logged sessionStorage item to true and navigate to the
+   * welcome page
+   * @param {ILoginResponse} response - ILoginResponse
+   */
   private onLoginSuccess(response: ILoginResponse): void {
     if (response.exito || response.exito === false) {
       sessionStorage.setItem('logged', 'true');
@@ -54,12 +59,22 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * It takes an error object as a parameter, displays a message to the user, and logs the error to the
+   * console
+   * @param {any} error - any - The error object that was returned from the server.
+   */
   private onLoginError(error: any) {
     this.openSnackBar('An error ocurred, try again later');
 
     console.error(error);
   }
 
+  /**
+   * The function takes a string as an argument and opens a snackbar with the message and a close
+   * button
+   * @param {string} message - string - The message to show in the snackbar.
+   */
   private openSnackBar(message: string) {
     this._snackBar.open(message, 'Close', {
       verticalPosition: 'top',
