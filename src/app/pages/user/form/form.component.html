@@ -14,6 +14,9 @@
         <mat-error *ngIf="mainForm.get('nombres')?.hasError('required')">
           Names are <strong>required</strong>
         </mat-error>
+        <mat-error *ngIf="mainForm.get('nombres')?.hasError('finalWhiteSpace')">
+          <strong>No whitespaces at the end</strong> allowed
+        </mat-error>
       </mat-form-field>
 
       <!-- Surnames -->

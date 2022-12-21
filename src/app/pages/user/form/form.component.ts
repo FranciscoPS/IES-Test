@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-  FormArray,
-  Form,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { whiteSpaceValidator } from 'src/app/shared/validators/whiteSpace.validator';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +9,7 @@ import {
 })
 export class FormComponent {
   public mainForm: FormGroup = this.formBuilder.group({
-    nombres: ['', [Validators.required]],
+    nombres: ['', [Validators.required, whiteSpaceValidator()]],
     apellidos: ['', [Validators.required]],
     fumas: [null, [Validators.required]],
     actualmentePracticasLectura: [null, [Validators.required]],
