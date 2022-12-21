@@ -42,6 +42,9 @@ export class FormComponent implements OnInit {
     return this.mainForm.controls['actualmentePracticasLectura'].value;
   }
 
+  /**
+   * If the form is valid, show a success notification, otherwise show an error notification
+   */
   public checkForm(): void {
     this.mainForm.valid
       ? this.alert.successNotification('The form is valid!')
