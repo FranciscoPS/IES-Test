@@ -13,6 +13,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { MatCardModule } from '@angular/material/card';
     MatNativeDateModule,
     MatSelectModule,
     MatCardModule,
+    MatRadioModule,
   ],
   exports: [
     MatToolbarModule,
@@ -44,6 +46,7 @@ import { MatCardModule } from '@angular/material/card';
     MatNativeDateModule,
     MatSelectModule,
     MatCardModule,
+    MatRadioModule,
   ],
   providers: [
     {

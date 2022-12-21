@@ -1,3 +1,75 @@
-<p>
-  form works!
-</p>
+<section class="form-section">
+  <div class="mt-4 form-container">
+    <h1 class="text-center">Forms Validators</h1>
+    <form [formGroup]="mainForm" class="mt-5">
+      <!-- Nombres -->
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Enter your names</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="nombres"
+          placeholder="Names"
+        />
+        <mat-error *ngIf="mainForm.get('nombres')?.hasError('required')">
+          Names are <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Surnames -->
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Enter your surnames</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="apellidos"
+          placeholder="Surnames"
+        />
+        <mat-error *ngIf="mainForm.get('apellidos')?.hasError('required')">
+          Surnames are <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Smoke -->
+      <div>
+        <label>Do you smoke?: </label>
+        <mat-radio-group formControlName="fumas">
+          <mat-radio-button [value]="true">Yes</mat-radio-button>
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- Reading -->
+      <div>
+        <label>Do you currently practice reading?: </label>
+        <mat-radio-group formControlName="actualmentePracticasLectura">
+          <mat-radio-button [value]="true">Yes</mat-radio-button>
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- Latest books -->
+      <div formArrayName="librosLeidosUltimosTresMeses">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Books read in the last 3 months</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="librosLeidosUltimosTresMeses"
+            placeholder="Book's name"
+          />
+        </mat-form-field>
+
+        <div *ngFor="let book of [1,2] ">{{book}}</div> 
+
+        <button mat-mini-fab (click)="addBook()">
+          <mat-icon class="add-course-btn">add</mat-icon>
+        </button>
+      </div>
+
+      <button class="mt-4" mat-raised-button color="warn" (click)="checkForm()">
+        Done
+      </button>
+    </form>
+  </div>
+</section>
